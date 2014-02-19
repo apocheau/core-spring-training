@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/jdbc
+              http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<!-- Configuration to support system testing the rewards application. -->
+
+	<!-- Imports application configuration -->
+	<import resource="classpath:rewards/internal/application-config.xml"/>
+	
+	<!-- Creates an in-memory "rewards" database populated with test data for fast testing -->
+	<jdbc:embedded-database id="dataSource">
+		<jdbc:script location="classpath:rewards/testdb/schema.sql"/>
+		<jdbc:script location="classpath:rewards/testdb/test-data.sql"/>
+	</jdbc:embedded-database>
+
+	<!-- A Hibernate SessionFactory for mapping Accounts and Restaurants from object to relation tables -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="annotatedClasses">
+			<list>
+				<value>rewards.internal.account.Account</value>
+				<value>rewards.internal.account.Beneficiary</value>
+				<value>rewards.internal.account.CreditCard</value>
+				<value>rewards.internal.restaurant.Restaurant</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.format_sql=true
+				hibernate.show_sql=true
+			</value>
+		</property>
+	</bean>
+
+	<!-- A transaction manager for working with Hibernate SessionFactories -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+</beans>

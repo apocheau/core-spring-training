@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util 
+                           http://www.springframework.org/schema/util/spring-util.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- TODO-03: Set the login page so it uses '/login.jsp' and the access denied page so it uses '/denied.jsp'.
+				  Check the username/password of the user defined in users.properties and use it to log into the application. 
+				  This user is not allowed to access the 'Account List' page yet. 
+				  After log in, you should expect to see access denied to this page. -->
+
+	<!-- TODO-04: Try to log in using incorrect user/password such as 'foo', 'foo'. You should see a 404 error 
+				  (file not found).	In this case, we want to be redirected to '/login.jsp?login_error=true'. 
+				  Update the configuration to make it happen.
+				  Re-deploy the application and try logging in again by using an incorrect username/password -->
+	
+	<!-- TODO-05: As defined below, users with role ROLE_EDITOR can already access '/accounts/account*'. 
+				  Update the configuration so users with  role ROLE_VIEWER can also access that same URL pattern.
+				  After completing this task, re-deploy the web application. User 'vince' should now be
+		          able to access the account list and account details. -->
+		 
+	<!-- TODO-06: See corresponding instructions inside 'users.properties' file --> 
+
+	<!-- TODO-07: 	Log out by clicking on the 'log out' link. Then try to access 'http://localhost:8080/security/accounts/hidden'.
+					As you can see, this URL is currently not protected.
+					Add a catch all with the pattern /accounts/**. For this pattern, all users should be
+					authenticated (no specific role required). Try to access this URL again and you should
+					now be redirected to the homepage. -->
+		
+	<!-- TODO-10: Bonus question: inside the authentication-provider, improve security by using MD5 hash -->
+
+	<!-- TODO-11: See corresponding instructions inside 'users.properties' file -->
+				  
+	<security:http use-expressions="true" access-denied-page="/TODO">
+		
+		<security:form-login login-page="/TODO" authentication-failure-url="/TODO" />
+
+		<security:intercept-url pattern="/accounts/edit*"
+			access="hasRole('ROLE_EDITOR')" />
+		
+		
+		<security:intercept-url pattern="/accounts/account*"
+			access="hasRole('ROLE_EDITOR')" />
+		<security:logout/>
+	</security:http>
+	 <security:authentication-manager>
+		<security:authentication-provider>			
+			<security:user-service properties="/WEB-INF/users.properties" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

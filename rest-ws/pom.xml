@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <groupId>com.springsource.training.core-spring</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>rest-ws</artifactId>
+	<packaging>war</packaging>
+    <version>3.2.0.CI-SNAPSHOT</version>
+	<!--<parent> -->
+		<!--<groupId>com.springsource.training.core-spring</groupId>-->
+	  	<!--<artifactId>parentCoreSpringProject</artifactId>-->
+		<!--<version>3.2.0.CI-SNAPSHOT</version>-->
+ 	<!--</parent>-->
+
+	<dependencies>
+		<!-- Common classes: Percentage, MonetaryAmount -->
+		<dependency>
+      		<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-common</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+  		</dependency>
+  		
+  		<!--
+  		  // Defines: Account, Beneficiary, AccountManager.
+  		  //
+  		  // NOTE: Dependencies for JPA, Hibernate and Spring are also provided
+  		  //       by this project - see rewards-db/pom.xml.
+  		  -->
+		<dependency>
+      		<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-db</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+  		</dependency>
+  		
+		<!--  Dependencies for web-layer -->
+  		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+            <version>3.2.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+		</dependency>
+		
+    	<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+            <version>1.2</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/AccountClientTests.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.3.2.201003220227-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/java/rewards/jms/jms-infrastructure-config.xml</config>
+		<config>src/main/java/rewards/jms/jms-rewards-config.xml</config>
+		<config>src/test/java/rewards/system-test-config.xml</config>
+		<config>src/main/java/rewards/jms/client/client-config.xml</config>
+		<config>src/main/java/rewards/internal/application-config.xml</config>
+	</configs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[serverTest]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/main/java/rewards/jms/jms-infrastructure-config.xml</config>
+				<config>src/main/java/rewards/jms/jms-rewards-config.xml</config>
+				<config>src/test/java/rewards/system-test-config.xml</config>
+			</configs>
+		</configSet>
+		<configSet>
+			<name><![CDATA[client]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/main/java/rewards/jms/client/client-config.xml</config>
+				<config>src/main/java/rewards/jms/jms-infrastructure-config.xml</config>
+			</configs>
+		</configSet>
+	</configSets>
+</beansProjectDescription>

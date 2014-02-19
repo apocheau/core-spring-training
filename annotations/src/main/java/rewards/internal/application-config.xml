@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/context
+              http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Configuration for the rewards application.  Beans here define the heart of the application logic. -->
+	
+	<!-- Enables detection of annotations used for configuration -->
+	<context:annotation-config/>	
+
+	<!-- Rewards accounts for dining: the application entry-point --> 
+	
+	
+	<!-- TODO-01: Remove the constructor-arguments and property definitions for all beans
+	              Try executing the RewardNetworkTests test class. It should fail. -->
+	
+	
+	<bean id="rewardNetwork" class="rewards.internal.RewardNetworkImpl">
+		<constructor-arg ref="accountRepository"/>
+		<constructor-arg ref="restaurantRepository"/>
+		<constructor-arg ref="rewardRepository"/>
+	</bean>
+
+	<!-- Loads accounts from the data source -->
+	<bean id="accountRepository" class="rewards.internal.account.JdbcAccountRepository">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- Loads restaurants from the data source -->
+	<bean id="restaurantRepository" class="rewards.internal.restaurant.JdbcRestaurantRepository">
+		<constructor-arg ref="dataSource"/>
+	</bean>
+
+	<!-- Records reward confirmation records in the data source -->
+	<bean id="rewardRepository" class="rewards.internal.reward.JdbcRewardRepository">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- TODO-06: Enable auto-scan feature of Spring, and remove the elements that are not required anymore from the XML file 
+				   After making the changes, re-run the test to ensure that it still passes -->
+	
+	<!-- TODO-07: Remove all of the bean definitions from the configuration file, and execute the test. It should fail. -->
+
+</beans>

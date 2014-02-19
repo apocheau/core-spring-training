@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- // NAME: rewards-db-config.xml // // MODULE: rewardsdb // // PURPOSE: 
+	Database and transaction configuration for testing the rewards // application. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<!-- Creates an in-memory "rewards" database populated with test data for 
+		fast testing -->
+	<jdbc:embedded-database id="dataSource">
+		<jdbc:script location="classpath:rewards/testdb/schema.sql" />
+		<jdbc:script location="classpath:rewards/testdb/test-data.sql" />
+	</jdbc:embedded-database>
+
+	<!-- Translates ORM exceptions to Spring Data Access Exceptions -->
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- Data access using 100% JPA -->
+	<beans profile="jpa">
+		<!-- A transaction manager for working with JPA Entity Managers -->
+		<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+			<property name="entityManagerFactory" ref="entityManagerFactory" />
+		</bean>
+
+		<!-- FactoryBean that creates the EntityManagerFactory -->
+		<bean id="entityManagerFactory"
+			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+			<property name="jpaVendorAdapter">
+				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+			</property>
+			<property name="packagesToScan" value="rewards.internal" />
+			<property name="jpaProperties">
+				<props>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.format_sql">true</prop>
+				</props>
+			</property>
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+	</beans>
+
+	<!-- Data access using 100% JPA and EclipseLink -->
+	<beans profile="jpa-elink">
+		<!-- A transaction manager for working with JPA Entity Managers -->
+		<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+			<property name="entityManagerFactory" ref="entityManagerFactory" />
+		</bean>
+
+		<!-- FactoryBean that creates the EntityManagerFactory -->
+		<bean id="entityManagerFactory"
+			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+			<property name="jpaVendorAdapter">
+				<bean
+					class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter" />
+			</property>
+			<property name="packagesToScan" value="rewards.internal" />
+			<property name="jpaProperties">
+				<props>
+					<prop key="eclipselink.logging.level">FINE</prop>
+					<prop key="eclipselink.logging.parameters">true</prop>
+					<prop key="eclipselink.weaving">false</prop>
+				</props>
+			</property>
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+	</beans>
+
+	<!-- Data access via Hibernate Session API -->
+	<beans profile="hibernate">
+		<!-- A transaction manager for working with Hibernate SessionFactories -->
+		<bean id="transactionManager"
+			class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+
+		<!-- A Hibernate SessionFactory for mapping Accounts and Beneficiaries 
+			from object to relation tables -->
+		<bean id="sessionFactory"
+			class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="annotatedClasses">
+				<list>
+					<value>rewards.internal.account.Account</value>
+					<value>rewards.internal.account.Beneficiary</value>
+					<value>rewards.internal.restaurant.Restaurant</value>
+				</list>
+			</property>
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.format_sql">true</prop>
+				</props>
+			</property>
+		</bean>
+	</beans>
+
+</beans>

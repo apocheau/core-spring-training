@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project name="ws" default="generate-sources">
+
+    <property name="src.dir" value="src/main/java"/>
+
+    <property name="repository.dir" value="${basedir}/../../repository"/>
+
+    <target name="generate-sources">
+
+      <exec executable="xjc">
+
+            <arg line=" -d ${src.dir} -p rewards.ws.types   src/main/webapp/WEB-INF/schemas/reward-network.xsd"/>
+
+      </exec>
+
+    </target>
+
+</project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<import resource="rewardNetwork-servlet-config.xml"/>
+	
+	<!-- Replacing MessageFactory -->
+	<!-- Default is org.springframework.ws.soap.saaj.SaajSoapMessageFactory -->
+	<bean id="messageFactory" class="org.springframework.ws.pox.dom.DomPoxMessageFactory"/> 
+	
+	<!-- Replacing Dispatcher -->
+	<!-- Default is org.springframework.ws.soap.server.SoapMessageDispatcher -->
+	<bean id="messageDispatcher" class="org.springframework.ws.server.MessageDispatcher"/>
+
+
+
+</beans>

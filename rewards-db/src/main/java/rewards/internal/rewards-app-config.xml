@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  // NAME:    rewards-app-config.xml
+  //
+  // MODULE:  rewardsdb
+  //
+  // PURPOSE: Configuration for integration testing the Account, Restaurant
+  //          and Reward repository implementations.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!--                   Repository configuration                    -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<!--  Enable @Autowired and @PersistenceContext -->
+	<context:annotation-config />
+
+	<bean id="rewardRepository" class="rewards.internal.reward.JdbcRewardRepository"/>
+
+	<!-- Data access using 100% JPA -->
+	<beans profile="jpa,jpa-elink">
+		<!-- Account access - repository object -->
+		<bean id="accountRepository" class="rewards.internal.account.JpaAccountRepository" />
+
+		<!-- Restaurant access - repository object -->
+		<bean id="restaurantRepository" class="rewards.internal.restaurant.JpaRestaurantRepository" />
+	</beans>
+
+	<!-- Data access via Hibernate Session API -->
+	<beans profile="hibernate">
+		<!-- Account access - repository object -->
+		<bean id="accountRepository" class="rewards.internal.account.HibernateAccountRepository"/>
+
+		<!-- Restaurant access - repository object -->
+		<bean id="restaurantRepository" class="rewards.internal.restaurant.HibernateRestaurantRepository"/>
+	</beans>
+
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- RMI endpoint for the RewardNetwork -->
+	<bean id="rmiExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="service" ref="rewardNetwork"/>
+		<property name="serviceInterface" value="rewards.RewardNetwork"/>
+		<property name="serviceName" value="rewardNetwork"/>
+		<property name="alwaysCreateRegistry" value="true"/>
+	</bean>
+		
+</beans>

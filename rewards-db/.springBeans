@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.7.2.201109122348-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/test/java/accounts/internal/accounts-test-config.xml</config>
+		<config>src/test/java/rewards/internal/rewards-test-config.xml</config>
+		<config>src/main/java/accounts/internal/accounts-app-config.xml</config>
+		<config>src/main/java/rewards/internal/rewards-app-config.xml</config>
+		<config>src/main/java/rewards/internal/rewards-db-config.xml</config>
+	</configs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[rewark-network]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/test/java/rewards/internal/rewards-test-config.xml</config>
+			</configs>
+		</configSet>
+		<configSet>
+			<name><![CDATA[accountManager]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/test/java/accounts/internal/accounts-test-config.xml</config>
+			</configs>
+		</configSet>
+	</configSets>
+</beansProjectDescription>

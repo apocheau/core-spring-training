@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rewardAccountForDiningRequest
+	xmlns="http://www.springsource.com/reward-network" 
+	amount="100.00"
+	creditCardNumber="1234123412341234" 
+	merchantNumber="1234567890" />

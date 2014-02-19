@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.springsource.com/reward-network" xmlns:r="http://www.springsource.com/reward-network">
+  <xs:element name="rewardAccountForDiningRequest">
+    <xs:complexType>
+      <xs:attribute name="amount" use="required" type="xs:decimal"/>
+      <xs:attribute name="creditCardNumber" use="required" type="xs:string"/>
+      <xs:attribute name="merchantNumber" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

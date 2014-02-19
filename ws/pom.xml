@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.springsource.training.core-spring</groupId>
+	<artifactId>ws</artifactId>
+	<packaging>war</packaging>
+    <version>3.2.0.CI-SNAPSHOT</version>
+	<!--<parent>-->
+		<!--<groupId>com.springsource.training.core-spring</groupId>-->
+		<!--<artifactId>parentCoreSpringProject</artifactId>-->
+		<!--<version>3.2.0.CI-SNAPSHOT</version>-->
+	<!--</parent>-->
+
+	<dependencies>
+		<!--  Common type classes -->
+		<dependency>
+			<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-common</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+		</dependency>
+
+  		<!--
+  		  // Defines: Account, Beneficiary, Restaurant, Reward, their
+  		  //          repositories and test database.
+  		  //
+  		  // NOTE: Dependencies for JPA, Hibernate and Spring are also provided
+  		  //       by this project - see rewards-db/pom.xml.
+  		  -->
+		<dependency>
+			<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-db</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+		</dependency>
+
+		<!--  Dependencies for web-services -->
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
+            <version>2.1.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<!-- required in order to download Sun related jars such as jaxb.
+		For licensing issue, they are not available on the Maven central repository -->
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Maven 2 Repository</name>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
+	</repositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/SoapRewardNetworkTests.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

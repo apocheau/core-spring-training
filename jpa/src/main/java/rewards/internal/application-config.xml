@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- Configuration for the rewards application.  Beans here define the heart of the application logic. -->
+
+	<!-- Rewards accounts for dining: the application entry-point --> 
+	<bean id="rewardNetwork" class="rewards.internal.RewardNetworkImpl">
+		<constructor-arg ref="accountRepository" />
+		<constructor-arg ref="restaurantRepository" />
+		<constructor-arg ref="rewardRepository" />
+	</bean>
+
+	<!-- TODO-09: Provide bean definitions for JpaAccountRepository and JpaRestaurantRepository -->
+
+	<!-- Records reward confirmation records in the data source -->
+	<bean id="rewardRepository" class="rewards.internal.reward.JdbcRewardRepository">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Instructs the container to look for beans with @Transactional and decorate them -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- TODO-10: Enable annotation configuration inside this application -->
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.springsource.training.core-spring</groupId>
+	<artifactId>test-solution</artifactId>
+	<packaging>jar</packaging>
+    <version>3.2.0.CI-SNAPSHOT</version>
+
+	<!--<parent>-->
+		<!--<groupId>com.springsource.training.core-spring</groupId>-->
+		<!--<artifactId>parentCoreSpringProject</artifactId>-->
+		<!--<version>3.2.0.CI-SNAPSHOT</version>-->
+	<!--</parent>-->
+
+	<dependencies>
+		<dependency>
+			<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-common</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>simple-jndi</groupId>
+			<artifactId>simple-jndi</artifactId>
+			<version>0.11.4.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

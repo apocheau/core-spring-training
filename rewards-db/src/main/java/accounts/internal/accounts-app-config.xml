@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  // NAME:    accounts-app-config.xml
+  //
+  // MODULE:  rewardsdb
+  //
+  // PURPOSE: Configuration for Account Management application.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!--                   Repository configuration                    -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<!--  Enable @Autowired and @PersistenceContext -->
+	<context:annotation-config />
+	
+	<!-- Enable transactions for the account-manager -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- Data access using 100% JPA -->
+	<beans profile="jpa,jpa-elink">
+		<!-- Account management - service object -->
+		<bean id="accountManager" class="accounts.internal.JpaAccountManager" />
+	</beans>
+
+	<!-- Data access via Hibernate Session API -->
+	<beans profile="hibernate">
+		<!-- Account management - service object -->
+		<bean id="accountManager" class="accounts.internal.HibernateAccountManager"/>
+	</beans>
+
+</beans>

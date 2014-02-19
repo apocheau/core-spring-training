@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+			http://java.sun.com/xml/ns/j2ee
+			http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<!--
+		Deploys the 'accounts' dispatcher servlet whose configuration resides
+		in /WEB-INF/mvc-config.xml
+	-->
+	<servlet>
+		<servlet-name>accounts</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/mvc-config.xml
+				/WEB-INF/app-config.xml
+			</param-value>
+		</init-param>
+    <load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Maps all URLs starting with /app to the 'accounts' servlet. -->
+	<servlet-mapping>
+		<servlet-name>accounts</servlet-name>
+		<url-pattern>/app/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>

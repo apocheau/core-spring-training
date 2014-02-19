@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- TODO-02: Define the 'rewardNetwork' bean (as an RmiProxyFactoryBean). 
+	If you haven't changed any of the default values inside rmi-server-config.xml, 
+	the url to be used is "rmi://localhost:1099/rewardNetwork" -->
+	
+</beans>

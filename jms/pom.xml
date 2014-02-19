@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <groupId>com.springsource.training.core-spring</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jms</artifactId>
+	<packaging>jar</packaging>
+    <version>3.2.0.CI-SNAPSHOT</version>
+	<!--<parent>-->
+		<!--<groupId>com.springsource.training.core-spring</groupId>-->
+		<!--<artifactId>parentCoreSpringProject</artifactId>-->
+		<!--<version>3.2.0.CI-SNAPSHOT</version>-->
+	<!--</parent>-->
+
+	<dependencies>		
+		<!--  Common type classes -->
+		<dependency>
+			<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-common</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+		</dependency>
+
+  		<!--
+  		  // Defines: Account, Beneficiary, Restaurant, Reward, their
+  		  //          repositories and test database.
+  		  //
+  		  // NOTE: Dependencies for JPA, Hibernate and Spring are also provided
+  		  //       by this project - see rewards-db/pom.xml.
+  		  -->
+		<dependency>
+			<groupId>com.springsource.training.core-spring</groupId>
+			<artifactId>rewards-db</artifactId>
+            <version>3.2.0.CI-SNAPSHOT</version>
+		</dependency>
+
+		<!-- Dependencies for JMS -->		
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+            <version>3.2.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+            <version>5.4.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jms_1.1_spec</artifactId>
+            <version>1.1.1</version>
+		</dependency>		
+	</dependencies>
+</project>

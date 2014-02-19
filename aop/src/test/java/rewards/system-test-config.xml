@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/jdbc
+							http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+	<!-- Configuration to support system testing the rewards application. -->
+
+	<!-- Imports application configuration -->
+	<import resource="classpath:rewards/internal/application-config.xml"/>
+	
+	
+	
+	<!-- TODO-05: Plug in the aspect configuration. 
+				  After the configuration file has been added, run the LoggingAspectTest class. 
+				  After executing the test, return to the instructions to use the Visualizing Aspect Weaving tools in STS.	  -->
+
+
+
+	<!-- Creates an in-memory "rewards" database populated with test data for fast testing -->
+	<jdbc:embedded-database id="dataSource">
+		  <jdbc:script location="classpath:rewards/testdb/schema.sql"/> 
+		  <jdbc:script location="classpath:rewards/testdb/test-data.sql"/> 
+	</jdbc:embedded-database>
+			
+</beans>
